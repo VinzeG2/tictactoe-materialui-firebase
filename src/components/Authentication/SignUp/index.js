@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import {FirebaseContext, withFirebase} from '../../../firebase';
 import * as ROUTES from '../../../constants/routes';
 
 const SignUpPage = () => (
@@ -18,14 +19,25 @@ const INITIAL_STATE = {
     error:null,
 };
 
-class SignUpForm extends Component {
+class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
     this.state = {...INITIAL_STATE};
   }
 
   onSubmit = event => {
+    const { email, passwordOne } = this.state;
 
+    this.props.firebase
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => {
+        this.setState({ ...INITIAL_STATE });
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+
+    event.preventDefault();
   }
 
   onChange = event => {
@@ -34,6 +46,11 @@ class SignUpForm extends Component {
 
   render() {
     const {username,email,passwordOne,passwordTwo,error} = this.state;
+    const isInvalid =
+    passwordOne !== passwordTwo ||
+    passwordOne === '' ||
+    email === '' ||
+    username === '';
     return (
       <form onSubmit={this.onSubmit}>
         <input
@@ -64,7 +81,7 @@ class SignUpForm extends Component {
           type="password"
           placeholder="Confirm Password"
         />
-        <button type="submit">Sign Up</button>
+        <button disabled={isInvalid} type="submit">Sign Up</button>
 
         {error && <p>{error.message}</p>}
       </form>
@@ -77,6 +94,8 @@ const SignUpLink = () => (
     Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
   </p>
 );
+
+const SignUpForm = withFirebase(SignUpFormBase);
 
 export default SignUpPage;
 
