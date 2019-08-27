@@ -3,7 +3,9 @@ import {Link} from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes'
 
-const Navigation = () => (
+const Navigation = ({ authUser }) => (<div> { authUser ? <NavigationAuth/>:<NavigationNonAuth/> } </div>);
+
+const NavigationAuth = () => (
     <div>
         <ul>
             <li>
@@ -11,6 +13,19 @@ const Navigation = () => (
             </li>
             <li>
                 <Link to={ROUTES.HOME}>Home</Link>
+            </li>
+            <li>
+                <Link to={ROUTES.LANDING}>Landing</Link>
+            </li>
+        </ul>
+    </div>
+);
+
+const NavigationNonAuth = () => (
+    <div>
+        <ul>
+            <li>
+                <Link to={ROUTES.SIGN_IN}>Sign In</Link>
             </li>
             <li>
                 <Link to={ROUTES.LANDING}>Landing</Link>

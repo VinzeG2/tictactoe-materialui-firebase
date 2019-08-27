@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -12,19 +12,30 @@ import SignUpPage from './components/Authentication/SignUp';
 import SignInPage from './components/Authentication/SignIn';
 
 import * as ROUTES from './constants/routes';
+import { withFirebase } from './firebase';
 
-const App = () =>  
-   (
+const App = ({firebase}) => {
+  const [authUser, setAuthUser] = useState(null);
+  useEffect(() => {
+    firebase.auth.onAuthStateChanged(
+      (authUser) => {
+        authUser ? setAuthUser({authUser}):setAuthUser(null);
+      }
+    );
+  });
+  return (
     <Router>
-    <div>
-      <Navigation />
-      <hr />
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-      <Route path={ROUTES.HOME} component={HomePage} />
-    </div>
-  </Router>
-  );
+      <div>
+        <Navigation authUser={authUser} />
+        <hr />
+        <Route exact path={ROUTES.LANDING} component={LandingPage} />
+        <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+        <Route path={ROUTES.HOME} component={HomePage} />
+      </div>
+    </Router>
+  ); 
+}
+   
 
-export default App;
+export default withFirebase(App);
