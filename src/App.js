@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -12,17 +12,10 @@ import SignUpPage from './components/Authentication/SignUp';
 import SignInPage from './components/Authentication/SignIn';
 
 import * as ROUTES from './constants/routes';
-import { withFirebase } from './firebase';
+import { withAuthentication } from './components/Authentication/Session';
 
-const App = ({firebase}) => {
-  const [authUser, setAuthUser] = useState(null);
-  useEffect(() => {
-    firebase.auth.onAuthStateChanged(
-      (authUser) => {
-        authUser ? setAuthUser({authUser}):setAuthUser(null);
-      }
-    );
-  });
+const App = ({authUser}) => {
+  console.log(authUser)
   return (
     <Router>
       <div>
@@ -38,4 +31,4 @@ const App = ({firebase}) => {
 }
    
 
-export default withFirebase(App);
+export default withAuthentication(App);
