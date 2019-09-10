@@ -5,7 +5,7 @@ import { AuthUserContext } from '../Authentication/Session';
 const HomePage = () => (
     <AuthUserContext.Consumer>
        { authUser => authUser ? 
-        <div><SignOutButton /> <p>Home Page</p> </div>
+        <div><SignOutButton /> <p>Home Page -- {authUser.authUser.email}</p> </div>
         : 
         <p>Home Page</p>
        }  
