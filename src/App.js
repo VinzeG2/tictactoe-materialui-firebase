@@ -14,12 +14,11 @@ import SignInPage from './components/Authentication/SignIn';
 import * as ROUTES from './constants/routes';
 import { withAuthentication } from './components/Authentication/Session';
 
-const App = ({authUser}) => {
-  console.log(authUser)
+const App = () => {
   return (
     <Router>
       <div>
-        <Navigation authUser={authUser} />
+        <Navigation />
         <hr />
         <Route exact path={ROUTES.LANDING} component={LandingPage} />
         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
