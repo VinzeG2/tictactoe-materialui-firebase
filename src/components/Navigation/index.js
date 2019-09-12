@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import { ButtonGroup } from '@material-ui/core';
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,18 +23,18 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const NavigationAuth = () => (
-    <div>
+    <ButtonGroup fullWidth>
         <Button color="inherit" href={ROUTES.SIGN_IN}>Sign In</Button>
         <Button color="inherit" href={ROUTES.HOME}>Home</Button>
         <Button color="inherit" href={ROUTES.LANDING}>Landing</Button>
-    </div>
+    </ButtonGroup>
 );
 
 const NavigationNonAuth = () => (
-    <div>
+    <ButtonGroup fullWidth>
         <Button color="inherit" href={ROUTES.SIGN_IN}>Sign In</Button>
         <Button color="inherit" href={ROUTES.SIGN_UP}>Sign Up</Button>
-    </div>
+    </ButtonGroup>
 );
 
 const Navigation = () => {
