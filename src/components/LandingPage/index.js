@@ -50,16 +50,6 @@ const useStyles = makeStyles(theme => ({
     return (
     <div className={classes.root}>
         <Grid container direction="row" justify="center" alignItems="center">
-            <ButtonGroup
-              variant="contained"
-              color="secondary"
-              fullWidth 
-            >
-              <Button href={ROUTES.SIGN_IN}>Sign In</Button>
-              <Button href={ROUTES.SIGN_UP}>Sign Up</Button>
-            </ButtonGroup>
-        </Grid>
-        <Grid container direction="row" justify="center" alignItems="center">
             <Typography variant="h1" component="h1" color="textSecondary" style={{marginTop: '5%'}}>
                 TIC TAC TOE #
             </Typography> 
