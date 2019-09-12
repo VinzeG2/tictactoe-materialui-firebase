@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { ButtonGroup, Button } from '@material-ui/core';
+import * as ROUTES from '../../constants/routes'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -54,8 +55,8 @@ const useStyles = makeStyles(theme => ({
               color="secondary"
               fullWidth 
             >
-              <Button>Sign In</Button>
-              <Button>Sign Up</Button>
+              <Button href={ROUTES.SIGN_IN}>Sign In</Button>
+              <Button href={ROUTES.SIGN_UP}>Sign Up</Button>
             </ButtonGroup>
         </Grid>
         <Grid container direction="row" justify="center" alignItems="center">
